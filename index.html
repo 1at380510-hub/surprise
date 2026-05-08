@@ -290,6 +290,46 @@ button:active{
     transform:scale(0.98);
 }
 
+/* مشغل الموسيقى */
+
+.music-player{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:rgba(255,255,255,0.2);
+    border:1px solid rgba(255,255,255,0.3);
+    backdrop-filter:blur(20px);
+    border-radius:50px;
+    padding:12px 20px;
+    z-index:20;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.3);
+}
+
+.music-btn{
+    background:none;
+    border:none;
+    color:white;
+    font-size:20px;
+    cursor:pointer;
+    padding:0;
+    margin:0;
+    box-shadow:none;
+    transition:0.3s;
+}
+
+.music-btn:hover{
+    transform:scale(1.15);
+}
+
+.music-info{
+    color:white;
+    font-size:12px;
+    min-width:120px;
+}
+
 /* الزخارف */
 
 .circle{
@@ -342,6 +382,16 @@ button:active{
         padding: 12px 30px;
         font-size: 14px;
     }
+
+    .music-player{
+        bottom:10px;
+        right:10px;
+        padding:10px 15px;
+    }
+
+    .music-info{
+        display:none;
+    }
 }
 
 </style>
@@ -349,6 +399,16 @@ button:active{
 </head>
 
 <body>
+
+<!-- مشغل الموسيقى -->
+<div class="music-player">
+    <button class="music-btn" id="musicBtn" onclick="toggleMusic()">🔊</button>
+    <div class="music-info" id="musicInfo">تشغيل 🎵</div>
+</div>
+
+<audio id="audioPlayer" loop>
+    <source src="https://serv100.albumaty.com/dl/waw/waled-elshami/singels/Albumaty.Com.Waleed.Al.Shami.Al.Sodfa.mp3" type="audio/mpeg">
+</audio>
 
 <div class="glow"></div>
 
@@ -372,6 +432,33 @@ button:active{
 </div>
 
 <script>
+
+/* الأغنية */
+
+const audio = document.getElementById('audioPlayer');
+const musicBtn = document.getElementById('musicBtn');
+let isPlaying = true;
+
+// تشغيل تلقائي
+window.addEventListener('load', () => {
+    audio.play().catch(err => {
+        console.log('لا يمكن تشغيل الموسيقى تلقائياً - اضغط على المتصفح أولاً');
+        isPlaying = false;
+        musicBtn.textContent = '🔇';
+    });
+});
+
+function toggleMusic(){
+    if(isPlaying){
+        audio.pause();
+        musicBtn.textContent = '🔇';
+        isPlaying = false;
+    } else {
+        audio.play();
+        musicBtn.textContent = '🔊';
+        isPlaying = true;
+    }
+}
 
 /* الرسائل */
 
