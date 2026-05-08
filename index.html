@@ -19,13 +19,17 @@
     box-sizing:border-box;
 }
 
+html, body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+
 body{
 
     font-family:'Cairo', sans-serif;
 
     min-height:100vh;
-
-    overflow:hidden;
 
     display:flex;
 
@@ -45,6 +49,8 @@ body{
 
     background-position:center;
 
+    background-attachment:fixed;
+
     position:relative;
 }
 
@@ -52,7 +58,7 @@ body{
 
 .glow{
 
-    position:absolute;
+    position:fixed;
 
     width:600px;
     height:600px;
@@ -64,16 +70,21 @@ body{
     filter:blur(90px);
 
     animation:pulse 5s infinite alternate;
+
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    pointer-events:none;
 }
 
 @keyframes pulse{
 
     from{
-        transform:scale(1);
+        transform:translate(-50%, -50%) scale(1);
     }
 
     to{
-        transform:scale(1.2);
+        transform:translate(-50%, -50%) scale(1.2);
     }
 }
 
@@ -81,7 +92,7 @@ body{
 
 .heart{
 
-    position:absolute;
+    position:fixed;
 
     color:#ffe9ff;
 
@@ -94,6 +105,8 @@ body{
     text-shadow:
     0 0 10px rgba(255,125,200,0.8),
     0 0 18px rgba(255,255,255,0.6);
+
+    z-index:1;
 }
 
 @keyframes float{
@@ -127,7 +140,8 @@ body{
 
 .card{
 
-    width:370px;
+    width:90%;
+    max-width:370px;
 
     background:rgba(255,255,255,0.15);
 
@@ -149,6 +163,8 @@ body{
     0 15px 40px rgba(0,0,0,0.25);
 
     animation:fadeUp 1.2s ease;
+
+    margin:0 auto;
 }
 
 @keyframes fadeUp{
@@ -226,6 +242,10 @@ h1{
     transition:0.5s;
 
     white-space:pre-line;
+
+    word-wrap:break-word;
+    overflow-wrap:break-word;
+    margin:0;
 }
 
 /* الزر */
@@ -266,6 +286,10 @@ button:hover{
     0 10px 30px rgba(255,255,255,0.4);
 }
 
+button:active{
+    transform:scale(0.98);
+}
+
 /* الزخارف */
 
 .circle{
@@ -293,6 +317,31 @@ button:hover{
 
     bottom:-30px;
     right:-20px;
+}
+
+@media (max-width: 480px) {
+    .card {
+        padding: 30px 20px;
+        border-radius: 25px;
+    }
+    
+    .bigHeart {
+        font-size: 60px;
+    }
+    
+    h1 {
+        font-size: 24px;
+    }
+    
+    #message {
+        font-size: 20px;
+        min-height: 140px;
+    }
+    
+    button {
+        padding: 12px 30px;
+        font-size: 14px;
+    }
 }
 
 </style>
